@@ -77,13 +77,13 @@ summarization_tokenizer, summarization_model = download_summarization_model_from
 # abstract_tokenizer, abstract_model = load_abstract_model()
 
 import gdown
-# https://drive.google.com/drive/folders/1ft84VHVuVT7LZNzar442JOFqCyf4kLjT?usp=sharing
+# https://drive.google.com/drive/folders/1yCdn5sr1Ob5RODeiTi1JCLodoDfYwH-k?usp=sharing
 @st.cache_resource
 def download_abstract_model_from_drive():
     model_path = "model"
     if not os.path.exists(model_path):
         gdown.download_folder(
-            "https://drive.google.com/drive/folders/1ft84VHVuVT7LZNzar442JOFqCyf4kLjT?usp=sharing", quiet=False, use_cookies=False
+            "https://drive.google.com/drive/folders/1yCdn5sr1Ob5RODeiTi1JCLodoDfYwH-k?usp=sharing", quiet=False, use_cookies=False
         )
     tokenizer = LEDTokenizerFast.from_pretrained(model_path)
     model = LEDForConditionalGeneration.from_pretrained(model_path)
