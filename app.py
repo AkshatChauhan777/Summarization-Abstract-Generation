@@ -40,12 +40,30 @@ def translate_text(text, source_lang, target_lang):
         print(f"Translation failed: {e}")
         return text
 
-# Load summarization model
-@st.cache_resource
-def load_summarization_model():
-    return pipeline("summarization", model="pszemraj/led-large-book-summary")
+# # Load summarization model
+# @st.cache_resource
+# def load_summarization_model():
+#     return pipeline("summarization", model="pszemraj/led-large-book-summary")
 
-summarizer = load_summarization_model()
+# summarizer = load_summarization_model()
+
+# https://drive.google.com/drive/folders/1ft84VHVuVT7LZNzar442JOFqCyf4kLjT?usp=sharing
+@st.cache_resource
+def download_summarization_model_from_drive():
+    model_path = "model1"
+    if not os.path.exists(model_path):
+        gdown.download_folder(
+            "https://drive.google.com/drive/folders/1ft84VHVuVT7LZNzar442JOFqCyf4kLjT?usp=sharing", 
+            output=model_path,
+            quiet=False,
+            use_cookies=False
+        )
+    tokenizer = LEDTokenizerFast.from_pretrained(model_path)
+    model = LEDForConditionalGeneration.from_pretrained(model_path)
+    return tokenizer, model
+
+summarization_tokenizer, summarization_model = download_summarization_model_from_drive()
+
 
 # # Load abstract generation model
 # @st.cache_resource
