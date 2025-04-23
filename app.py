@@ -47,15 +47,31 @@ def load_summarization_model():
 
 summarizer = load_summarization_model()
 
-# Load abstract generation model
+# # Load abstract generation model
+# @st.cache_resource
+# def load_abstract_model():
+#     model_path = "/content/drive/MyDrive/AI Based Summary and Abstract Generator/led-abstract-generator/checkpoint-250"
+#     tokenizer = LEDTokenizerFast.from_pretrained(model_path)
+#     model = LEDForConditionalGeneration.from_pretrained(model_path)
+#     return tokenizer, model
+
+# abstract_tokenizer, abstract_model = load_abstract_model()
+
+import gdown
+# https://drive.google.com/drive/folders/14bj5dJ6mmbD9o-ATLzfNVScw1nVap0x7?usp=sharing
 @st.cache_resource
-def load_abstract_model():
-    model_path = "/content/drive/MyDrive/AI Based Summary and Abstract Generator/led-abstract-generator/checkpoint-250"
+def download_abstract_model_from_drive():
+    model_path = "model"
+    if not os.path.exists(model_path):
+        gdown.download_folder(
+            "https://drive.google.com/drive/folders/14bj5dJ6mmbD9o-ATLzfNVScw1nVap0x7?usp=sharing", quiet=False, use_cookies=False
+        )
     tokenizer = LEDTokenizerFast.from_pretrained(model_path)
     model = LEDForConditionalGeneration.from_pretrained(model_path)
     return tokenizer, model
 
-abstract_tokenizer, abstract_model = load_abstract_model()
+abstract_tokenizer, abstract_model = download_abstract_model_from_drive()
+
 
 # Clean incomplete sentence
 def ensure_complete_sentences(text):
