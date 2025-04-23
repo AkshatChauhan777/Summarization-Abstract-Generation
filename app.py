@@ -1,3 +1,4 @@
+import gdown
 import streamlit as st
 from transformers import pipeline, LEDForConditionalGeneration, LEDTokenizerFast
 from langdetect import detect
@@ -15,7 +16,6 @@ import xml.etree.ElementTree as ET
 import yake
 from io import StringIO
 import torch
-import gdown
 
 # Constants
 WORD_LIMIT = 1600
