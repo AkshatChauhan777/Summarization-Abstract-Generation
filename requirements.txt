@@ -1,0 +1,15 @@
+streamlit
+transformers
+torch
+langdetect
+googletrans==4.0.0-rc1
+translatepy
+goslate
+pymupdf
+python-docx
+pandas
+python-pptx
+beautifulsoup4
+odfpy
+ebooklib
+yake
